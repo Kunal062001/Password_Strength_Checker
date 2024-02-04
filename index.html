@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <style>
+        *::before, *::after, * {
+      box-sizing: border-box;
+
+        
+        }
+
+        body {
+            font-family:'Times New Roman', Times, serif;
+            font-weight: bolder;
+            background-color: hsl(7, 88%, 17%);
+            color: hsl(44, 82%, 49%);
+            text-align: center;
+        }
+        div{
+            width: 90%;
+            margin: auto;
+        }
+        .form-control {
+            margin-top: 1rem;
+            height: 30px;
+            background-color: hsl(261, 88%, 25%);
+            color: white;
+            border: 1px solid hsl(261, 88%, 57%);
+            outline: none;
+            text-align: center;
+            border-radius: 1rem;
+        }
+        ::placeholder{
+            color: white;
+        }
+        .progress-bar {
+            border-radius: 5px;
+            height: 23px;
+            border-radius: 1rem;
+        }
+        .help-block {
+            border-radius: 5px;
+            height: 30px;
+            border: 3px solid hsl(261, 67%, 13%);
+            border-radius: 1rem;
+        }
+        .img1{
+
+            text-align: right;
+            }
+        #note{
+            color: hsl(261, 88%, 67%);
+        }    
+        .h{
+
+            text-align: right;
+            }
+    </style>
+</head>
+<body>
+    <div>
+        <section>
+            <h1>Password Meter</h1>
+            <img class="img1" src="logo.jpg"></img>
+            <h1 class="h">By - Cyber Sanskar</h1>
+        </section>
+        <section>    
+            <small class="help-block" id="password-text"></small>
+        </section>
+        <section>    
+            <input id="password" type="password" value="" name="password" class="form-control" placeholder="Enter your Password" onkeyup="isGood(this.value)" />
+        </section><br>
+        <section id="note">
+            <h4>Note: Must Include Uppercase Letters</h4>
+            <h4>Note: Must Include Lowercase Letters</h4>
+            <h4>Note: Must Include Numbers</h4>
+            <h4>Note: Must Include Special Character</h4>
+        </section>
+    </div>    
+
+      <script>
+          function isGood(password) {
+      var password_strength = document.getElementById("password-text");
+
+      //TextBox left blank.
+      if (password.length == 0) {
+        password_strength.innerHTML = "";
+        return;
+      }
+
+      //Regular Expressions.
+      var regex = new Array();
+      regex.push("[A-Z]"); //Uppercase Alphabet.
+      regex.push("[a-z]"); //Lowercase Alphabet.
+      regex.push("[0-9]"); //Digit.
+      regex.push("[$@$!%*#?&]"); //Special Character.
+
+      var passed = 0;
+
+      //Validate for each Regular Expression.
+      for (var i = 0; i < regex.length; i++) {
+        if (new RegExp(regex[i]).test(password)) {
+          passed++;
+        }
+      }
+
+      //Display status.
+      var strength = "";
+      switch (passed) {
+        case 0:
+        case 1:
+        case 2:
+          strength = "<small class='progress-bar progress-bar-danger' style='width: 40%'>Weak</small><br>";
+          break;
+        case 3:
+          strength = "<small class='progress-bar progress-bar-warning' style='width: 60%'>Medium</small><br>";
+          break;
+        case 4:
+          strength = "<small class='progress-bar progress-bar-success' style='width: 100%'>Strong</small><br>";
+          break;
+
+      }
+      password_strength.innerHTML = strength;
+
+    }
+      </script>    
+</body>
+</html>
