@@ -11,6 +11,7 @@
 ![Screen Shot](password.png)
 
 It is an web-application to check the strength of the given password..
+https://passwordstrengthcheck-56e64.web.app/
 
 ## Built With
 
